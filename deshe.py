@@ -175,7 +175,6 @@ def main():
     choose_customer(CUSTOMER_NAME)
     
     while True:
-        import pdb; pdb.set_trace()
         result = raw_input("1. fill day, 2. add_break: ")
         if result == "1":
             day = raw_input("enter day: ")
