@@ -4,6 +4,7 @@ from datetime import datetime, date
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 import re
+import getpass
 
 browser = webdriver.Chrome()
 
@@ -14,7 +15,7 @@ PROJECT_NAME = u'נוסבול'
 HALF_AN_HOUR = u'קיזוז 0.5 שעה הפסקה צעל 6 שעות עבודה'
 DESCRIPTION = "."
 USERNAME = "noammar"
-PASSWORD = 'UGFzc3dvcmQ0JA==\n'.decode("base64")
+PASSWORD = None
 DATERANGE_REGEX = re.compile("(?P<from>\d{2}:\d{2}) - (?P<to>\d{2}:\d{2})")
 HOUR_FORMAT = '%H:%M'
 
@@ -168,6 +169,10 @@ def save():
 
 def main():
     MONTH = 9
+    if PASSWORD is None:
+        password = getpass.getpass(prompt='Password: ')
+    else:
+        password = PASSWORD    
     browser.get(DESHE_CONNECTION_URL % (USERNAME, PASSWORD) )
     select_month(MONTH)
     browser.switch_to.frame(browser.find_elements_by_tag_name("iframe")[3])
